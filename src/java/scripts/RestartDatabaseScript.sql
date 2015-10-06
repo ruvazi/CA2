@@ -1,3 +1,75 @@
+SET FOREIGN_KEY_CHECKS = 0;
+drop table if exists address;
+drop table if exists cityinfo;
+drop table if exists company;
+drop table if exists hobby;
+drop table if exists infoentity;
+drop table if exists person;
+drop table if exists phone;
+SET FOREIGN_KEY_CHECKS = 1;
+
+CREATE TABLE IF NOT EXISTS CityInfo (
+  ZIPCODE VARCHAR(20) NOT NULL,
+  CITY VARCHAR(50),
+  PRIMARY KEY (ZIPCODE)
+);
+
+CREATE TABLE IF NOT EXISTS InfoEntity (
+  ID INT NOT NULL AUTO_INCREMENT,
+  EMAIL VARCHAR (255),
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE IF NOT EXISTS Address (
+  ID INT NOT NULL AUTO_INCREMENT,
+  ID_A INT NOT NULL,
+  STREET VARCHAR(255) NOT NULL,
+  ADDITIONALINFO VARCHAR(255),
+  ZIPCODE_A VARCHAR(50),
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ZIPCODE_A) REFERENCES CityInfo(ZIPCODE),
+  FOREIGN KEY (ID_A) REFERENCES InfoEntity(ID)
+);
+
+CREATE TABLE IF NOT EXISTS Phone (
+  ID INT NOT NULL AUTO_INCREMENT,
+  ID_P INT NOT NULL,
+  PHONENUM VARCHAR(50),
+  DESCRIPTION VARCHAR(255),
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID_P) REFERENCES InfoEntity(ID)
+);
+
+CREATE TABLE IF NOT EXISTS Company (
+  ID INT NOT NULL AUTO_INCREMENT,
+  ID_C INT NOT NULL,
+  COMPANYNAME VARCHAR(255),
+  DESCRIPTION VARCHAR(500),
+  CVR VARCHAR(255),
+  NUMEMPLOYEES INT NOT NULL,
+  MARKETVALUE VARCHAR (255) NOT NULL,
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID_C) REFERENCES InfoEntity(ID)
+);
+
+CREATE TABLE IF NOT EXISTS Person (
+  ID INT NOT NULL AUTO_INCREMENT,
+  ID_P INT NOT NULL,
+  FIRSTNAME VARCHAR(255),
+  LASTNAME VARCHAR(255),
+  PRIMARY KEY (ID),
+  FOREIGN KEY (ID_P) REFERENCES InfoEntity(ID)
+);
+
+CREATE TABLE IF NOT EXISTS Hobby (
+  ID INT NOT NULL AUTO_INCREMENT,
+  ID_H INT NOT NULL,
+  HOBBYNAME VARCHAR(255),
+  DESCRIPTION VARCHAR(255),
+  PRIMARY KEY(ID),
+  FOREIGN KEY (ID_H) REFERENCES Person(ID)
+);
+
 INSERT INTO CITYINFO (ZIPCODE, CITY) VALUES ('0555', 'Scanning');
 INSERT INTO CITYINFO (ZIPCODE, CITY) VALUES ('0800', 'Høje Taastrup');
 INSERT INTO CITYINFO (ZIPCODE, CITY) VALUES ('0877', 'København C');
@@ -1351,3 +1423,34 @@ INSERT INTO CITYINFO (ZIPCODE, CITY) VALUES ('950', 'Porkeri');
 INSERT INTO CITYINFO (ZIPCODE, CITY) VALUES ('960', 'Hov');
 INSERT INTO CITYINFO (ZIPCODE, CITY) VALUES ('970', 'Sumba');
 
+INSERT INTO infoentity VALUES (NULL,'jens@hotmail.dk');
+INSERT INTO infoentity VALUES (NULL,'mette@gmail.com');
+INSERT INTO infoentity VALUES (NULL,'gertrud@ofir.dk');
+INSERT INTO infoentity VALUES (NULL,'emil@arto.dk');
+
+INSERT INTO address VALUES (NULL,(select ID from infoentity where EMAIL='jens@hotmail.dk'),'Fuglevej 54','',(select ZIPCODE from cityinfo where ZIPCODE='2820'));
+INSERT INTO address VALUES (NULL,(select ID from infoentity where EMAIL='mette@gmail.com'),'Bjørnevej 69','',(select ZIPCODE from cityinfo where ZIPCODE='2412'));
+INSERT INTO address VALUES (NULL,(select ID from infoentity where EMAIL='gertrud@ofir.dk'),'Eksisterer Ikke Vej 420','',(select ZIPCODE from cityinfo where ZIPCODE='6541'));
+INSERT INTO address VALUES (NULL,(select ID from infoentity where EMAIL='emil@arto.dk'),'Bag Ved En 7/11 I Herning','',(select ZIPCODE from cityinfo where ZIPCODE='7400'));
+
+INSERT INTO phone VALUES (NULL,(select ID from infoentity where EMAIL='jens@hotmail.dk'),'49283753','Kan rigtig godt lide torskerogn');
+INSERT INTO phone VALUES (NULL,(select ID from infoentity where EMAIL='mette@gmail.com'),'33826532','Arbejder i IKEA');
+INSERT INTO phone VALUES (NULL,(select ID from infoentity where EMAIL='gertrud@ofir.dk'),'55467946','Spiller squash i sin fritid');
+INSERT INTO phone VALUES (NULL,(select ID from infoentity where EMAIL='emil@arto.dk'),'43424343','Går i bukser lavet af hamp');
+
+INSERT INTO company VALUES (NULL,(select ID from infoentity where EMAIL='jens@hotmail.dk'),'Footlocker','Kan rigtig godt lide fødder','65458795',420,'500,000');
+INSERT INTO company VALUES (NULL,(select ID from infoentity where EMAIL='mette@gmail.com'),'JustEat','Gir os masser af mad','55487955',69,'420,000');
+INSERT INTO company VALUES (NULL,(select ID from infoentity where EMAIL='gertrud@ofir.dk'),'Big Boss Dog Publishing','De er lidt underlige','45789663',187,'69,000');
+INSERT INTO company VALUES (NULL,(select ID from infoentity where EMAIL='emil@arto.dk'),'Please Help Me I Am Dying LLC','Avoid at all costs','36636343',1,'-500,000,000');
+
+INSERT INTO person VALUES (NULL,(select ID from infoentity where EMAIL='jens@hotmail.dk'),'Jens','Mortensen');
+INSERT INTO person VALUES (NULL,(select ID from infoentity where EMAIL='mette@gmail.com'),'Mette','Mouritsen');
+INSERT INTO person VALUES (NULL,(select ID from infoentity where EMAIL='gertrud@ofir.dk'),'Gertrud','Bodilsen');
+INSERT INTO person VALUES (NULL,(select ID from infoentity where EMAIL='emil@arto.dk'),'Emil','Hjælpmigsen');
+
+INSERT INTO hobby VALUES (NULL,(select ID from infoentity where EMAIL='jens@hotmail.dk'),'Crocket','Pænt baller');
+INSERT INTO hobby VALUES (NULL,(select ID from infoentity where EMAIL='mette@gmail.com'),'Fletning','Ikke specielt baller');
+INSERT INTO hobby VALUES (NULL,(select ID from infoentity where EMAIL='gertrud@ofir.dk'),'Squash','Gør pisse ondt');
+INSERT INTO hobby VALUES (NULL,(select ID from infoentity where EMAIL='emil@arto.dk'),'At blive knust af kapitalismen','Whoops');
+
+COMMIT;
