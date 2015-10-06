@@ -12,7 +12,7 @@ import javax.persistence.*;
  * @author Rune
  */
 @Entity
-public class Phone extends InfoCity{
+public class Phone extends InfoEntity{
     private String number;
     private String discription;
 

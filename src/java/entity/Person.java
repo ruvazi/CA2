@@ -12,7 +12,7 @@ import javax.persistence.Entity;
  * @author Rune
  */
 @Entity
-public class Person extends InfoCity {
+public class Person extends InfoEntity {
     private String firstName;
     private String lastName;
 
