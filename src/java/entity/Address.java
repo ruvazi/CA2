@@ -34,7 +34,7 @@ public class Address implements Serializable {
     private String additionalinfo;
     @JoinColumn(name = "ZIPCODE_A", referencedColumnName = "ZIPCODE")
     @ManyToOne
-    private Cityinfo cityinfo;
+    private CityInfo cityinfo;
     @JoinColumn(name = "ID_A", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Infoentity infoentity;
@@ -75,11 +75,11 @@ public class Address implements Serializable {
         this.additionalinfo = additionalinfo;
     }
 
-    public Cityinfo getCityinfo() {
+    public CityInfo getCityinfo() {
         return cityinfo;
     }
 
-    public void setCityinfo(Cityinfo cityinfo) {
+    public void setCityinfo(CityInfo cityinfo) {
         this.cityinfo = cityinfo;
     }
 
