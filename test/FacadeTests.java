@@ -6,6 +6,8 @@
 
 import control.ControlCRUD;
 import entity.Person;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -37,6 +39,14 @@ public class FacadeTests {
     
     @After
     public void tearDown() {
+    }
+    
+    @Test
+    public void findPersonByCity(){
+        List<Person> list = new ArrayList();
+        list = ctrl.getPersonsByCity("2412");
+        Person p = list.get(0);
+        assertEquals("Mette",p.getFirstname());
     }
 
     @Test
