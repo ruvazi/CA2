@@ -5,10 +5,16 @@
  */
 package entity;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Rune
  */
-public class Hobby {
+@Entity
+public class Hobby extends Person{
+    private String name;
+    private String discription;
+    
     
 }

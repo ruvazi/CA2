@@ -5,10 +5,15 @@
  */
 package entity;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author Rune
  */
-public class Address {
+@Entity
+public class Address extends InfoCity{
+    private String Address;
+    private String AdditionalInfo;
     
 }

@@ -5,54 +5,41 @@
  */
 package entity;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  *
  * @author Rune
  */
 @Entity
-public class Phone implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Phone extends InfoCity{
+    private String number;
+    private String discription;
 
-    public Long getId() {
-        return id;
+    public Phone(String number, String discription) {
+        this.number = number;
+        this.discription = discription;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Phone() {
+    }
+    
+
+    public String getNumber() {
+        return number;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Phone)) {
-            return false;
-        }
-        Phone other = (Phone) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public String getDiscription() {
+        return discription;
     }
 
-    @Override
-    public String toString() {
-        return "entity.Phone[ id=" + id + " ]";
+    public void setDiscription(String discription) {
+        this.discription = discription;
     }
+    
     
 }
