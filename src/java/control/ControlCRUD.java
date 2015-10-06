@@ -6,12 +6,20 @@ import entity.Hobby;
 import entity.Person;
 import facade.Facade;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class ControlCRUD implements Facade {
+    EntityManagerFactory EMF = Persistence.createEntityManagerFactory("CA-2-ORM-REST-AJAXPU");
+    EntityManager EM = EMF.createEntityManager();
 
     @Override
     public Person getPerson(int phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q = EM.createNamedQuery("Person.findByPhone");
+        q.setParameter("phonenum", phoneNumber);
+        return (Person) q.getSingleResult();
     }
 
     @Override
