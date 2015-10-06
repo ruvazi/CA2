@@ -6,10 +6,9 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.*;
 
 /**
  *
@@ -22,7 +21,16 @@ public class InfoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String email;
-
+    
+    
+    @ManyToOne
+    List<Address> address = new ArrayList<>();
+    @OneToMany
+    List<Phone> phone = new ArrayList<>();
+    
+    
+    
+    
     public Long getId() {
         return id;
     }

@@ -5,6 +5,8 @@
  */
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -12,9 +14,14 @@ import javax.persistence.*;
  * @author Rune
  */
 @Entity
-public class Phone extends InfoEntity{
+public class Phone{
     private String number;
     private String discription;
+    @Id
+    private Long id;
+    
+    @ManyToOne
+    List<InfoEntity> infoEntity = new ArrayList<>();
 
     public Phone(String number, String discription) {
         this.number = number;
@@ -39,6 +46,14 @@ public class Phone extends InfoEntity{
 
     public void setDiscription(String discription) {
         this.discription = discription;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     

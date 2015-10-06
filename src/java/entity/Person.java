@@ -5,7 +5,10 @@
  */
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -15,6 +18,9 @@ import javax.persistence.Entity;
 public class Person extends InfoEntity {
     private String firstName;
     private String lastName;
+    
+    @ManyToMany(mappedBy = "person")
+    List<Hobby> hobby = new ArrayList<>();
 
     public String getFirstName() {
         return firstName;

@@ -5,8 +5,13 @@
  */
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -18,6 +23,13 @@ public class Address{
     private Long id;
     private String Address;
     private String AdditionalInfo;
+    
+    
+    @ManyToOne
+    List<CityInfo> cityInfo = new ArrayList<>();
+    
+    @OneToMany
+    List<InfoEntity> infoEntity = new ArrayList<>();
 
     public Long getId() {
         return id;

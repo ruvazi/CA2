@@ -5,7 +5,11 @@
  */
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -15,6 +19,10 @@ import javax.persistence.Entity;
 public class CityInfo extends Address {
     private String zipCode;
     private String city;
+    
+    
+    @OneToMany
+    List<Address> adress = new ArrayList<>();
 
     public String getZipCode() {
         return zipCode;
