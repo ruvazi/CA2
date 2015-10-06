@@ -24,32 +24,45 @@ public class ControlCRUD implements Facade {
 
     @Override
     public List<Person> getPersonsByHobby(Hobby hobby) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q = EM.createNamedQuery("Person.findByHobby");
+        q.setParameter("hobbyname", hobby.getHobbyname());
+        return q.getResultList();
     }
 
     @Override
     public List<Person> getPersonsByCity(String zip) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q = EM.createNamedQuery("Person.findByCity");
+        q.setParameter("zip", zip);
+        return q.getResultList();
     }
 
     @Override
     public Company getCompanyByPhone(int phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q = EM.createNamedQuery("Company.findByPhone");
+        q.setParameter("phonenum", phoneNumber);
+        return (Company) q.getSingleResult();
     }
 
     @Override
     public Company getCompanyByCVR(int cvr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Query q = EM.createNamedQuery("Company.findByCvr");
+       q.setParameter("cvr", cvr);
+       return (Company) q.getSingleResult();
     }
 
     @Override
     public List<Company> getCompaniesByStaffCount(int staffMembers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query q = EM.createNamedQuery("Company.findByNumemployees");
+        q.setParameter("numemployees", staffMembers);
+        return q.getResultList();
     }
 
     @Override
-    public int getHobbyCount(Hobby hobby) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getHobbyCount(String hobby) {
+        Query q = EM.createNamedQuery("Person.findByHobbyCount");
+        q.setParameter("hobbyname", hobby);
+        return (Integer) q.getSingleResult();
+        
     }
 
     @Override

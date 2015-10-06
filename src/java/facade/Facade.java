@@ -20,7 +20,7 @@ public interface Facade {
 
     List<Company> getCompaniesByStaffCount(int staffMembers);
 
-    int getHobbyCount(Hobby hobby);
+    int getHobbyCount(String hobby);
 
     List<CityInfo> getZipcodes();
 

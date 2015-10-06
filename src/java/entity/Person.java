@@ -21,6 +21,9 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
     @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.infoentity.phoneCollection.phonenum = :phonenum"),
+    @NamedQuery(name = "Person.findByHobby", query = "SELECT p FROM Person p WHERE p.hobbyCollection.hobbyname = :hobbyname"),
+    @NamedQuery(name = "Person.findByHobbyCount", query = "SELECT COUNT(p) FROM Person p WHERE p.hobbyCollection.hobbyname = :hobbyname"),
+    @NamedQuery(name = "Person.findByCity", query = "SELECT p FROM Person p WHERE p.infoentity.addressCollection.cityinfo.zipcode = :zip"),
     @NamedQuery(name = "Person.findById", query = "SELECT p FROM Person p WHERE p.id = :id"),
     @NamedQuery(name = "Person.findByFirstname", query = "SELECT p FROM Person p WHERE p.firstname = :firstname"),
     @NamedQuery(name = "Person.findByLastname", query = "SELECT p FROM Person p WHERE p.lastname = :lastname")})
