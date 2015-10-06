@@ -1,49 +1,86 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-/**
- *
- * @author Rune
- */
 @Entity
-public class Company extends InfoEntity {
-    private String name;
-    private String discription;
+@Table(name = "company")
+@NamedQueries({
+    @NamedQuery(name = "Company.findAll", query = "SELECT c FROM Company c"),
+    @NamedQuery(name = "Company.findById", query = "SELECT c FROM Company c WHERE c.id = :id"),
+    @NamedQuery(name = "Company.findByCompanyname", query = "SELECT c FROM Company c WHERE c.companyname = :companyname"),
+    @NamedQuery(name = "Company.findByDescription", query = "SELECT c FROM Company c WHERE c.description = :description"),
+    @NamedQuery(name = "Company.findByCvr", query = "SELECT c FROM Company c WHERE c.cvr = :cvr"),
+    @NamedQuery(name = "Company.findByNumemployees", query = "SELECT c FROM Company c WHERE c.numemployees = :numemployees"),
+    @NamedQuery(name = "Company.findByMarketvalue", query = "SELECT c FROM Company c WHERE c.marketvalue = :marketvalue")})
+public class Company implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
+    @Column(name = "COMPANYNAME")
+    private String companyname;
+    @Column(name = "DESCRIPTION")
+    private String description;
+    @Column(name = "CVR")
     private String cvr;
-    private String NumEmployees;
-    private String marketValue;
-
-    public Company(String name, String discription, String cvr, String NumEmployees, String marketValue) {
-        this.name = name;
-        this.discription = discription;
-        this.cvr = cvr;
-        this.NumEmployees = NumEmployees;
-        this.marketValue = marketValue;
-    }
+    @Basic(optional = false)
+    @Column(name = "NUMEMPLOYEES")
+    private int numemployees;
+    @Basic(optional = false)
+    @Column(name = "MARKETVALUE")
+    private String marketvalue;
+    @JoinColumn(name = "ID_C", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Infoentity infoentity;
 
     public Company() {
     }
 
-    public String getName() {
-        return name;
+    public Company(Integer id) {
+        this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Company(Integer id, int numemployees, String marketvalue) {
+        this.id = id;
+        this.numemployees = numemployees;
+        this.marketvalue = marketvalue;
     }
 
-    public String getDiscription() {
-        return discription;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCompanyname() {
+        return companyname;
+    }
+
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getCvr() {
@@ -54,20 +91,53 @@ public class Company extends InfoEntity {
         this.cvr = cvr;
     }
 
-    public String getNumEmployees() {
-        return NumEmployees;
+    public int getNumemployees() {
+        return numemployees;
     }
 
-    public void setNumEmployees(String NumEmployees) {
-        this.NumEmployees = NumEmployees;
+    public void setNumemployees(int numemployees) {
+        this.numemployees = numemployees;
     }
 
-    public String getMarketValue() {
-        return marketValue;
+    public String getMarketvalue() {
+        return marketvalue;
     }
 
-    public void setMarketValue(String marketValue) {
-        this.marketValue = marketValue;
+    public void setMarketvalue(String marketvalue) {
+        this.marketvalue = marketvalue;
     }
-    
+
+    public Infoentity getInfoentity() {
+        return infoentity;
+    }
+
+    public void setInfoentity(Infoentity infoentity) {
+        this.infoentity = infoentity;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Company)) {
+            return false;
+        }
+        Company other = (Company) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "entity.Company[ id=" + id + " ]";
+    }
+
 }

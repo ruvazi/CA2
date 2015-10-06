@@ -1,66 +1,119 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-/**
- *
- * @author Rune
- */
 @Entity
-public class Address{
+@Table(name = "address")
+@NamedQueries({
+    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
+    @NamedQuery(name = "Address.findById", query = "SELECT a FROM Address a WHERE a.id = :id"),
+    @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street"),
+    @NamedQuery(name = "Address.findByAdditionalinfo", query = "SELECT a FROM Address a WHERE a.additionalinfo = :additionalinfo")})
+public class Address implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    private Long id;
-    private String Address;
-    private String AdditionalInfo;
-    
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
+    @Basic(optional = false)
+    @Column(name = "STREET")
+    private String street;
+    @Column(name = "ADDITIONALINFO")
+    private String additionalinfo;
+    @JoinColumn(name = "ZIPCODE_A", referencedColumnName = "ZIPCODE")
     @ManyToOne
-    List<CityInfo> cityInfo = new ArrayList<>();
-    
-    @OneToMany
-    List<InfoEntity> infoEntity = new ArrayList<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Cityinfo cityinfo;
+    @JoinColumn(name = "ID_A", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Infoentity infoentity;
 
     public Address() {
     }
 
-    public Address(String Address, String AdditionalInfo) {
-        this.Address = Address;
-        this.AdditionalInfo = AdditionalInfo;
+    public Address(Integer id) {
+        this.id = id;
     }
 
-    public String getAddress() {
-        return Address;
+    public Address(Integer id, String street) {
+        this.id = id;
+        this.street = street;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public Integer getId() {
+        return id;
     }
 
-    public String getAdditionalInfo() {
-        return AdditionalInfo;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setAdditionalInfo(String AdditionalInfo) {
-        this.AdditionalInfo = AdditionalInfo;
+    public String getStreet() {
+        return street;
     }
-    
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getAdditionalinfo() {
+        return additionalinfo;
+    }
+
+    public void setAdditionalinfo(String additionalinfo) {
+        this.additionalinfo = additionalinfo;
+    }
+
+    public Cityinfo getCityinfo() {
+        return cityinfo;
+    }
+
+    public void setCityinfo(Cityinfo cityinfo) {
+        this.cityinfo = cityinfo;
+    }
+
+    public Infoentity getInfoentity() {
+        return infoentity;
+    }
+
+    public void setInfoentity(Infoentity infoentity) {
+        this.infoentity = infoentity;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Address)) {
+            return false;
+        }
+        Address other = (Address) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "entity.Address[ id=" + id + " ]";
+    }
+
 }
