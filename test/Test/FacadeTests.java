@@ -1,3 +1,5 @@
+package Test;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,9 +7,7 @@
  */
 
 import control.ControlCRUD;
-import entity.Company;
-import entity.Hobby;
-import entity.Person;
+import entity.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -45,12 +45,12 @@ public class FacadeTests {
     public void tearDown() {
     }
     
-    @Test
-    public void getCompanyByPhone(){
-        Company c = new Company();
-        c = ctrl.getCompanyByPhone("49283753");
-        assertEquals("Footlocker",c.getCompanyname());
-    }
+//    @Test
+//    public void getCompanyByPhone(){
+//        Company c = new Company();
+//        c = ctrl.getCompanyByPhone("49283753");
+//        assertEquals("Footlocker",c.getCompanyname());
+//    }
 
     @Test
     public void findPersonByCity() {

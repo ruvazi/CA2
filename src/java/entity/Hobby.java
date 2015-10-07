@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
 import java.io.Serializable;
@@ -12,9 +17,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Rune
+ */
 @Entity
 @Table(name = "hobby")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Hobby.findAll", query = "SELECT h FROM Hobby h"),
     @NamedQuery(name = "Hobby.findById", query = "SELECT h FROM Hobby h WHERE h.id = :id"),
@@ -27,13 +39,15 @@ public class Hobby implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 255)
     @Column(name = "HOBBYNAME")
     private String hobbyname;
+    @Size(max = 255)
     @Column(name = "DESCRIPTION")
     private String description;
     @JoinColumn(name = "ID_H", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Person person;
+    private Person idH;
 
     public Hobby() {
     }
@@ -66,12 +80,12 @@ public class Hobby implements Serializable {
         this.description = description;
     }
 
-    public Person getPerson() {
-        return person;
+    public Person getIdH() {
+        return idH;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setIdH(Person idH) {
+        this.idH = idH;
     }
 
     @Override
@@ -98,5 +112,5 @@ public class Hobby implements Serializable {
     public String toString() {
         return "entity.Hobby[ id=" + id + " ]";
     }
-
+    
 }

@@ -1,6 +1,6 @@
 package facade;
 
-import entity.CityInfo;
+import entity.Cityinfo;
 import entity.Company;
 import entity.Hobby;
 import entity.Person;
@@ -22,7 +22,7 @@ public interface Facade {
 
     int getHobbyCount(String hobby);
 
-    List<CityInfo> getZipcodes();
+    List<Cityinfo> getZipcodes();
 
     void createPerson();
 

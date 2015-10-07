@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
 import java.io.Serializable;
@@ -12,9 +17,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Rune
+ */
 @Entity
 @Table(name = "phone")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Phone.findAll", query = "SELECT p FROM Phone p"),
     @NamedQuery(name = "Phone.findById", query = "SELECT p FROM Phone p WHERE p.id = :id"),
@@ -27,13 +39,15 @@ public class Phone implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 50)
     @Column(name = "PHONENUM")
     private String phonenum;
+    @Size(max = 255)
     @Column(name = "DESCRIPTION")
     private String description;
     @JoinColumn(name = "ID_P", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Infoentity infoentity;
+    private InfoEntity idP;
 
     public Phone() {
     }
@@ -66,12 +80,12 @@ public class Phone implements Serializable {
         this.description = description;
     }
 
-    public Infoentity getInfoentity() {
-        return infoentity;
+    public InfoEntity getIdP() {
+        return idP;
     }
 
-    public void setInfoentity(Infoentity infoentity) {
-        this.infoentity = infoentity;
+    public void setIdP(InfoEntity idP) {
+        this.idP = idP;
     }
 
     @Override
@@ -98,5 +112,5 @@ public class Phone implements Serializable {
     public String toString() {
         return "entity.Phone[ id=" + id + " ]";
     }
-
+    
 }

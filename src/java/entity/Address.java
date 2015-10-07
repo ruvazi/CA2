@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
 import java.io.Serializable;
@@ -12,9 +17,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author Rune
+ */
 @Entity
 @Table(name = "address")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
     @NamedQuery(name = "Address.findById", query = "SELECT a FROM Address a WHERE a.id = :id"),
@@ -28,16 +41,19 @@ public class Address implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "STREET")
     private String street;
+    @Size(max = 255)
     @Column(name = "ADDITIONALINFO")
     private String additionalinfo;
     @JoinColumn(name = "ZIPCODE_A", referencedColumnName = "ZIPCODE")
     @ManyToOne
-    private CityInfo cityinfo;
+    private Cityinfo zipcodeA;
     @JoinColumn(name = "ID_A", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Infoentity infoentity;
+    private InfoEntity idA;
 
     public Address() {
     }
@@ -75,20 +91,20 @@ public class Address implements Serializable {
         this.additionalinfo = additionalinfo;
     }
 
-    public CityInfo getCityinfo() {
-        return cityinfo;
+    public Cityinfo getZipcodeA() {
+        return zipcodeA;
     }
 
-    public void setCityinfo(CityInfo cityinfo) {
-        this.cityinfo = cityinfo;
+    public void setZipcodeA(Cityinfo zipcodeA) {
+        this.zipcodeA = zipcodeA;
     }
 
-    public Infoentity getInfoentity() {
-        return infoentity;
+    public InfoEntity getIdA() {
+        return idA;
     }
 
-    public void setInfoentity(Infoentity infoentity) {
-        this.infoentity = infoentity;
+    public void setIdA(InfoEntity idA) {
+        this.idA = idA;
     }
 
     @Override
@@ -115,5 +131,5 @@ public class Address implements Serializable {
     public String toString() {
         return "entity.Address[ id=" + id + " ]";
     }
-
+    
 }
