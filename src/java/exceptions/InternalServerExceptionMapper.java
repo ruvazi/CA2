@@ -15,7 +15,7 @@ public class InternalServerExceptionMapper implements ExceptionMapper<Throwable>
     @Override
     public Response toResponse(Throwable e){
         JsonObject jo = new JsonObject();
-        jo.addProperty("message", "Something broke lol");
+        jo.addProperty("message", e.getMessage());
         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(jo.toString()).build();
     }
 

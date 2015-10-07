@@ -31,6 +31,7 @@ public class ControlCRUD implements Facade {
     @Override
     public Person getPerson(String phoneNum){
         Query q = EM.createNamedQuery("Phone.findByPhonenum").setParameter("phonenum", phoneNum);
+        System.out.println("PHONE NUMBER IS " + phoneNum);
         Phone ph = (Phone) q.getSingleResult();
         Infoentity ie = ph.getInfoentity();
         Collection cl = ie.getPersonCollection();
