@@ -14,7 +14,7 @@ public interface Facade {
 
     List<Person> getPersonsByCity(String zip);
 
-    Company getCompanyByPhone(int phoneNumber);
+    Company getCompanyByPhone(String phoneNumber);
 
     Company getCompanyByCVR(int cvr);
 

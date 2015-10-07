@@ -5,6 +5,7 @@
  */
 
 import control.ControlCRUD;
+import entity.Company;
 import entity.Hobby;
 import entity.Person;
 import java.util.ArrayList;
@@ -45,13 +46,10 @@ public class FacadeTests {
     }
     
     @Test
-    public void hobby(){
-        List<Person> list = new ArrayList();
-        Hobby h = new Hobby();
-        h.setHobbyname("Crocket");
-        list = ctrl.getPersonsByHobby(h);
-        Person p = list.get(0);
-        System.out.println(p.getFirstname());
+    public void getCompanyByPhone(){
+        Company c = new Company();
+        c = ctrl.getCompanyByPhone("49283753");
+        assertEquals("Footlocker",c.getCompanyname());
     }
 
     @Test

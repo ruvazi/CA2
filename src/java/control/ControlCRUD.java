@@ -71,10 +71,13 @@ public class ControlCRUD implements Facade {
     }
 
     @Override
-    public Company getCompanyByPhone(int phoneNumber) {
-        Query q = EM.createNamedQuery("Company.findByPhone");
-        q.setParameter("phonenum", phoneNumber);
-        return (Company) q.getSingleResult();
+    public Company getCompanyByPhone(String phoneNumber) {
+        Query q = EM.createNamedQuery("Phone.findByPhonenum").setParameter("phonenum", phoneNumber);
+        Phone p = (Phone) q.getSingleResult();
+        Infoentity ie = p.getInfoentity();
+        List<Company> cc = (List<Company>) ie.getCompanyCollection();
+        Company c = cc.get(0);
+        return c;
     }
 
     @Override
