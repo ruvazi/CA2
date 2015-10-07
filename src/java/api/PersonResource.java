@@ -26,7 +26,6 @@ import javax.ws.rs.core.Response;
  */
 @Path("generic")
 public class PersonResource {
-    ControlCRUD ctrl = new ControlCRUD();
     Gson gson;
 
     @Context
@@ -44,7 +43,7 @@ public class PersonResource {
     @Produces("application/json")
     public Response getPerson(@PathParam("phoneNumber") String phoneNumber) {
         System.out.println(phoneNumber);
-        return Response.status(Response.Status.OK).entity(gson.toJson(ctrl.getPerson(phoneNumber))).build();
+        return Response.status(Response.Status.OK).entity(gson.toJson(ControlCRUD.getPerson(phoneNumber))).build();
     }
 
     @PUT
