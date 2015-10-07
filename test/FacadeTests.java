@@ -5,6 +5,7 @@
  */
 
 import control.ControlCRUD;
+import entity.Hobby;
 import entity.Person;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,37 +22,59 @@ import javax.persistence.*;
  * @author Home
  */
 public class FacadeTests {
+
     ControlCRUD ctrl = new ControlCRUD();
+
     public FacadeTests() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
     
     @Test
-    public void findPersonByCity(){
+    public void hobby(){
+        List<Person> list = new ArrayList();
+        Hobby h = new Hobby();
+        h.setHobbyname("Crocket");
+        list = ctrl.getPersonsByHobby(h);
+        Person p = list.get(0);
+        System.out.println(p.getFirstname());
+    }
+
+    @Test
+    public void findPersonByCity() {
         List<Person> list = new ArrayList();
         list = ctrl.getPersonsByCity("2412");
         Person p = list.get(0);
-        assertEquals("Mette",p.getFirstname());
+        assertEquals("Mette", p.getFirstname());
+    }
+    
+    @Test
+    public void findPersonByHobby() {
+        List<Person> list = new ArrayList();
+        Hobby h = new Hobby();
+        h.setHobbyname("Crocket");
+        list = ctrl.getPersonsByHobby(h);
+        Person p = list.get(0);
+        assertEquals("Jens", p.getFirstname());
     }
 
     @Test
     public void findPersonByPhone() {
-    Person p = ctrl.getPerson(49283753);
-    assertEquals("Jens",p.getFirstname());
+        Person p = ctrl.getPerson("49283753");
+        assertEquals("Jens", p.getFirstname());
     }
 }

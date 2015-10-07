@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,10 +21,10 @@ import javax.persistence.Table;
 @Table(name = "person")
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
-    @NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.infoentity.phoneCollection.phonenum = :phonenum"),
-    @NamedQuery(name = "Person.findByHobby", query = "SELECT p FROM Person p WHERE p.hobbyCollection.hobbyname = :hobbyname"),
-    @NamedQuery(name = "Person.findByHobbyCount", query = "SELECT COUNT(p) FROM Person p WHERE p.hobbyCollection.hobbyname = :hobbyname"),
-    @NamedQuery(name = "Person.findByCity", query = "SELECT p FROM Person p WHERE p.infoentity.addressCollection.cityinfo.zipcode = :zip"),
+    //@NamedQuery(name = "Person.findByPhone", query = "SELECT p FROM Person p WHERE p.infoentity.phoneCollection.phonenum = :phonenum"),
+    //@NamedQuery(name = "Person.findByHobby", query = "SELECT p FROM Person p WHERE p.hobbyCollection.hobbyname = :hobbyname"),
+    //@NamedQuery(name = "Person.findByHobbyCount", query = "SELECT COUNT(p) FROM Person p WHERE p.hobbyCollection.hobbyname = :hobbyname"),
+    //@NamedQuery(name = "Person.findByCity", query = "SELECT p FROM Person p WHERE p.infoentity.addressCollection.cityinfo.zipcode = :zip"),
     @NamedQuery(name = "Person.findById", query = "SELECT p FROM Person p WHERE p.id = :id"),
     @NamedQuery(name = "Person.findByFirstname", query = "SELECT p FROM Person p WHERE p.firstname = :firstname"),
     @NamedQuery(name = "Person.findByLastname", query = "SELECT p FROM Person p WHERE p.lastname = :lastname")})
@@ -42,7 +43,7 @@ public class Person implements Serializable {
     @ManyToOne(optional = false)
     private Infoentity infoentity;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
-    private Collection<Hobby> hobbyCollection;
+    private Collection<Hobby> hobbyCollection = new ArrayList();
 
     public Person() {
     }

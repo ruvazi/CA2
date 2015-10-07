@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface Facade {
 
-    Person getPerson(int phoneNumber);
+    Person getPerson(String phoneNumber);
 
     List<Person> getPersonsByHobby(Hobby hobby);
 

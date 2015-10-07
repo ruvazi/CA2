@@ -21,7 +21,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Company.findByCompanyname", query = "SELECT c FROM Company c WHERE c.companyname = :companyname"),
     @NamedQuery(name = "Company.findByDescription", query = "SELECT c FROM Company c WHERE c.description = :description"),
     @NamedQuery(name = "Company.findByCvr", query = "SELECT c FROM Company c WHERE c.cvr = :cvr"),
-    @NamedQuery(name = "Company.findByPhone", query = "SELECT c FROM Company c WHERE c.infoentity.phoneCollection.phonenum = :phonenum"),
+    //@NamedQuery(name = "Company.findByPhone", query = "SELECT c FROM Company c WHERE c.infoentity.phoneCollection.phonenum = :phonenum"),
     @NamedQuery(name = "Company.findByNumemployees", query = "SELECT c FROM Company c WHERE c.numemployees > :numemployees"),
     @NamedQuery(name = "Company.findByMarketvalue", query = "SELECT c FROM Company c WHERE c.marketvalue = :marketvalue")})
 public class Company implements Serializable {
